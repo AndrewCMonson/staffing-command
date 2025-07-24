@@ -108,14 +108,25 @@ function App() {
 														ref={provided.innerRef}
 														{...provided.draggableProps}
 														{...provided.dragHandleProps}
-														className="bg-gray-50 rounded-md p-4 mb-4 shadow-sm hover:shadow-md border border-gray-200 cursor-grab transition"
+														className="bg-white rounded-md p-4 mb-4 shadow hover:shadow-md border border-gray-200 cursor-move transition"
 													>
-														<h3 className="font-semibold text-gray-800 text-sm mb-1">
-															{job.title || 'Untitled'}
+														<h3 className="font-semibold text-gray-800 text-sm leading-snug mb-1">
+															{job.title}
 														</h3>
+														<p className="text-xs text-gray-500 mb-1">
+															ID: {job.jobId} · {job.companyName}
+														</p>
+														<p className="text-xs text-gray-500 mb-1">
+															Status:{' '}
+															<span className="font-medium text-gray-700">
+																{job.jobStatus}
+															</span>
+														</p>
 														<p className="text-xs text-gray-500">
-															ID: {job.jobId || 'N/A'} ·{' '}
-															{job.companyName || 'N/A'}
+															Owner:{' '}
+															<span className="font-medium text-gray-700">
+																{job.firstOwner}
+															</span>
 														</p>
 													</div>
 												)}

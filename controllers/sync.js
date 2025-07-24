@@ -38,6 +38,9 @@ async function mapRowToProperties(row) {
 		'Third Owner': {
 			rich_text: [{ text: { content: row['Third Owner'] || '' } }],
 		},
+		'First Owner': {
+			rich_text: [{ text: { content: row['First Owner'] || '' } }],
+		},
 	};
 }
 

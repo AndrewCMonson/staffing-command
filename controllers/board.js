@@ -16,20 +16,24 @@ export async function getBoardData(req, res) {
 				const recruiterName =
 					recruiter.properties['Recruiter Name']?.title?.[0]?.plain_text ||
 					'Unknown';
+
 				const jobRelations = recruiter.properties['Open Jobs']?.relation || [];
 
 				const jobs = await Promise.all(
 					jobRelations.map(async rel => {
 						const job = await notion.pages.retrieve({ page_id: rel.id });
+						const props = job.properties;
+
 						return {
 							id: job.id,
 							title:
-								job.properties['Job Name']?.rich_text?.[0]?.plain_text ||
-								'Untitled Job',
-							jobId: job.properties['Job Id']?.title?.[0]?.plain_text || '',
+								props['Job Name']?.rich_text?.[0]?.plain_text || 'Untitled Job',
+							jobId: props['Job Id']?.title?.[0]?.plain_text || '',
 							companyName:
-								job.properties['Company Name']?.rich_text?.[0]?.plain_text ||
-								'',
+								props['Company Name']?.rich_text?.[0]?.plain_text || '',
+							firstOwner:
+								props['First Owner']?.rich_text?.[0]?.plain_text || '',
+							jobStatus: props['Job Status']?.rich_text?.[0]?.plain_text || '',
 						};
 					})
 				);
